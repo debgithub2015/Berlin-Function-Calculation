@@ -1,0 +1,285 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      9146,        276]
+NotebookOptionsPosition[      8401,        248]
+NotebookOutlinePosition[      8748,        263]
+CellTagsIndexPosition[      8705,        260]
+WindowFrame->Normal
+ContainsDynamic->False*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "This Programme computes the Binding Function for  each point of the \
+reaction path\nThe Binding Function is defined as \n                          \
+   F",
+ StyleBox["B =  ",
+  FontSize->10],
+ "-  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"\[Alpha]", "=", "1"}], "N"], 
+    StyleBox[
+     SubscriptBox["R", "\[Alpha]"],
+     FontWeight->"Bold"]}], TraditionalForm]]],
+ ".",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    SubscriptBox["F", "\[Alpha]"],
+    FontWeight->"Bold"], TraditionalForm]]],
+ "=-",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"\[Alpha]", "=", "1"}], "N"], 
+    StyleBox[
+     SubscriptBox[
+      StyleBox["R",
+       FontWeight->"Bold"], "\[Alpha]"],
+     FontWeight->"Bold"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "\n The Forces(",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    SubscriptBox["F", "\[Alpha]"],
+    FontWeight->"Bold"], TraditionalForm]]],
+ ")  and nuclear distances (",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    SubscriptBox["R", "\[Alpha]"],
+    FontWeight->"Bold"], TraditionalForm]]],
+ ") can be can be computed from the Gaussian Files\nThis programme will take \
+the values from the Excel files and compute the binding functions in terms of \
+Matrix Multiplication  "
+}], "Text",
+ CellChangeTimes->{{3.428663657565*^9, 3.428663684566*^9}, {3.428663723092*^9,
+   3.4286639027460003`*^9}, {3.428663943991*^9, 3.428663973781*^9}, {
+  3.4286640393710003`*^9, 3.42866416929*^9}, {3.4286642136070004`*^9, 
+  3.4286642170950003`*^9}, {3.428667856684*^9, 3.4286678576400003`*^9}, {
+  3.4286806298859997`*^9, 3.4286806487*^9}, {3.428680940255*^9, 
+  3.428680960906*^9}, {3.428681004041*^9, 3.4286810067349997`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Remove", "[", "\"\<Global`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.4286642236280003`*^9, 3.428664263653*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Remove", "::", "\<\"rmnsm\"\>"}], 
+  RowBox[{
+  ":", " "}], "\<\"There are no symbols matching \\\"\\!\\(\\\"Global`\\\"\\)\
+\\\". \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Remove/rmnsm\\\", \
+ButtonNote -> \\\"Remove::rmnsm\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.428667370876*^9, 3.428667410374*^9, 3.428667625435*^9, 3.428667770325*^9, 
+   3.42866786192*^9, 3.4286682197530003`*^9, 3.428668468009*^9, 
+   3.42866851895*^9, 3.428668924383*^9, 3.4286805604370003`*^9, 
+   3.428680617157*^9, {3.42868561538*^9, 3.428685635748*^9}, {
+   3.428690444451*^9, 3.428690453329*^9}, {3.428690582633*^9, 
+   3.4286906018640003`*^9}}]
+}, Open  ]],
+
+Cell["\<\
+We first import the data from the excel file, where the first three columns \
+are the forces (in Hartree /Bohr unit) on each atom, calculated by Gaussian \
+and the next three are the distance (in Bohr unit)\
+\>", "Text",
+ CellChangeTimes->{{3.42866857591*^9, 3.428668701512*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Tdata", ":=", 
+  RowBox[{
+  "Import", "[", 
+   "\"\<C:\\Users\\Debajit\\Documents\\My Work\\Comprehensive\\IRC + Berlin \
+Calculations\\Cl+CH3Cl\\Berlin Function\\Excel Files for Forces and Nuclear \
+Positions\\Cl+CH3Cl_BF1.xls\>\"", "]"}]}]], "Input",
+ CellChangeTimes->{{3.428667124093*^9, 3.428667131281*^9}, {
+   3.4286672825690002`*^9, 3.428667360693*^9}, {3.4286674063859997`*^9, 
+   3.428667407698*^9}, 3.42866746184*^9, {3.428667654837*^9, 
+   3.4286676573*^9}, {3.428667687803*^9, 3.4286677218719997`*^9}, 
+   3.428667871752*^9, 3.428668198597*^9}],
+
+Cell["\<\
+We have distributed the data in fx, fy, fz and x, y, z components\
+\>", "Text",
+ CellChangeTimes->{{3.4286687192609997`*^9, 3.428668748021*^9}}],
+
+Cell[BoxData[
+ RowBox[{"a0", ":=", "0.529177249", "   ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Bohr", " ", "Radius"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.428690385153*^9, 3.428690410591*^9}, {
+  3.4286905971730003`*^9, 3.4286905992679996`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Tdata1", "=", 
+   RowBox[{"Tdata", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "All"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fxdata", "=", 
+   RowBox[{"Tdata1", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "1"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fydata", "=", 
+   RowBox[{"Tdata1", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fzdata", "=", 
+   RowBox[{"Tdata1", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "3"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"xdata", "=", 
+   RowBox[{
+    RowBox[{"Tdata1", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "4"}], "]"}], "]"}], "/", "a0"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ydata", "=", 
+   RowBox[{
+    RowBox[{"Tdata1", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "5"}], "]"}], "]"}], "/", "a0"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"zdata", "=", 
+   RowBox[{
+    RowBox[{"Tdata1", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "6"}], "]"}], "]"}], "/", "a0"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Xdata", "=", 
+   RowBox[{"xdata", "-", 
+    RowBox[{"Mean", "[", "xdata", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Ydata", "=", 
+   RowBox[{"ydata", "-", 
+    RowBox[{"Mean", "[", "ydata", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Zdata", "=", 
+   RowBox[{"zdata", "-", 
+    RowBox[{"Mean", "[", "zdata", "]"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.428667365784*^9, 3.428667381811*^9}, {
+  3.4286680162720003`*^9, 3.4286680272139997`*^9}, {3.42866806158*^9, 
+  3.4286680709709997`*^9}, {3.4286682029639997`*^9, 3.4286682775369997`*^9}, {
+  3.428668333692*^9, 3.428668503907*^9}, {3.428685597403*^9, 
+  3.428685598501*^9}, {3.4286904171359997`*^9, 3.428690436927*^9}}],
+
+Cell["Now we are going to calculate the Binding Function", "Text",
+ CellChangeTimes->{{3.428668755675*^9, 3.428668770771*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Vnn", ":=", "109.3974286642", "      ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Nuclear", "-", 
+    RowBox[{"Nuclear", " ", "Interaction"}]}], " ", "*)"}], " "}]], "Input",
+ CellChangeTimes->{{3.42868053521*^9, 3.428680569553*^9}, 3.428680614816*^9, {
+   3.428685649679*^9, 3.428685678237*^9}, {3.428685926543*^9, 
+   3.428685927551*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"bind", "=", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"fxdata", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "*", 
+        RowBox[{"Xdata", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"fydata", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "*", 
+        RowBox[{"Ydata", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"fzdata", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "*", 
+        RowBox[{"Zdata", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "6"}], "}"}]}], "]"}]}], "+", 
+   "Vnn"}]}]], "Input",
+ CellChangeTimes->{{3.428668797433*^9, 3.428668816017*^9}, {3.428668853184*^9,
+   3.428668967641*^9}, {3.428669109137*^9, 3.428669136*^9}, {
+  3.428680548019*^9, 3.428680557731*^9}, {3.4286856057790003`*^9, 
+  3.42868561301*^9}}],
+
+Cell[BoxData["109.39333426735634`"], "Output",
+ CellChangeTimes->{
+  3.4286689250220003`*^9, 3.4286689684779997`*^9, {3.428669109941*^9, 
+   3.4286691371070004`*^9}, 3.428680561106*^9, 3.428680617775*^9, {
+   3.428685615992*^9, 3.4286856363640003`*^9}, {3.428690445102*^9, 
+   3.428690453983*^9}, {3.4286905832980003`*^9, 3.42869060251*^9}}]
+}, Open  ]]
+},
+WindowSize->{1904, 1079},
+WindowMargins->{{-482, Automatic}, {Automatic, 496}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (March 13, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[568, 21, 1766, 54, 121, "Text"],
+Cell[CellGroupData[{
+Cell[2359, 79, 138, 2, 31, "Input"],
+Cell[2500, 83, 764, 14, 21, "Message"]
+}, Open  ]],
+Cell[3279, 100, 289, 5, 29, "Text"],
+Cell[3571, 107, 581, 11, 31, "Input"],
+Cell[4155, 120, 154, 3, 29, "Text"],
+Cell[4312, 125, 253, 5, 31, "Input"],
+Cell[4568, 132, 1974, 62, 212, "Input"],
+Cell[6545, 196, 126, 1, 29, "Text"],
+Cell[6674, 199, 357, 7, 31, "Input"],
+Cell[CellGroupData[{
+Cell[7056, 210, 985, 28, 31, "Input"],
+Cell[8044, 240, 341, 5, 30, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

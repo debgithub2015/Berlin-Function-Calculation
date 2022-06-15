@@ -1,0 +1,417 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     11663,        408]
+NotebookOptionsPosition[     11294,        392]
+NotebookOutlinePosition[     11636,        407]
+CellTagsIndexPosition[     11593,        404]
+WindowFrame->Normal
+ContainsDynamic->False*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "This programme computes the force constant for any set of internal \
+co-ordinates.In our case we have , For the reaction of  Cl- +CH3Cl   ->  \
+CH3Cl +Cl- , it is almost sufficient to take the two C-Cl bond length ,as \
+they have  a major impact on the change of the structure, as internal \
+co-ordinates to describe how the change in nuclear fukui function actually \
+influences the vibrations in the reation species.\nWe know from the \
+definition of IRC, if the potential energy can be represented as  V( q1, q2) \
+where q1 and q2 are the two internal co-ordinates, then \n\n                  \
+                                         ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     SubscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"del", " ", "V"}], 
+         RowBox[{"del", " ", "q1"}]], "|"}], ")"}], "q2"], 
+     SubscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"del", " ", "V"}], 
+         RowBox[{"del", " ", "q2"}]], "|"}], ")"}], "q1"]], "=", " ", 
+    "Constant", "   "}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " \n                                                           \n    Now if \
+we look at those gradients we can find\n               \n                   \
+",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["dV", "dq"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " =",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     FractionBox[
+      RowBox[{"\[PartialD]", "V"}], 
+      RowBox[{"\[PartialD]", " ", 
+       SubscriptBox["X", "i"]}]], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["X", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "   +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     FractionBox[
+      RowBox[{"\[PartialD]", "V"}], 
+      RowBox[{"\[PartialD]", " ", 
+       SubscriptBox["Y", "i"]}]], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["Y", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     FractionBox[
+      RowBox[{"\[PartialD]", "V"}], 
+      RowBox[{"\[PartialD]", " ", 
+       SubscriptBox["Z", "i"]}]], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["Z", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ "  \n                   ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["F", "q"], "  ", "="}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"i", "=", "1"}], "N"], 
+     RowBox[{
+      SubscriptBox["F", "x"], 
+      FractionBox[
+       RowBox[{"\[PartialD]", 
+        SubscriptBox["X", "i"]}], 
+       RowBox[{"\[PartialD]", " ", "q"}]]}]}], "+", 
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"i", "=", "1"}], "N"], 
+     RowBox[{
+      SubscriptBox["F", "y"], 
+      FractionBox[
+       RowBox[{"\[PartialD]", 
+        SubscriptBox["Y", "i"]}], 
+       RowBox[{"\[PartialD]", " ", "q"}]]}]}], "+", 
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"i", "=", "1"}], "N"], 
+     RowBox[{
+      SubscriptBox["F", "z"], 
+      FractionBox[
+       RowBox[{"\[PartialD]", 
+        SubscriptBox["Z", "i"]}], 
+       RowBox[{"\[PartialD]", " ", "q"}]]}]}]}], TraditionalForm]]],
+ "     \n    Taking the next derivative we get\n                  ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", " ", 
+     SubscriptBox["F", "q"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " =     ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     SubscriptBox["F", "x"], 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["\[PartialD]", "2"], 
+       SubscriptBox["X", "i"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SuperscriptBox["q", "2"]}]]}]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     SubscriptBox["F", "y"], 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["\[PartialD]", "2"], 
+       SubscriptBox["Y", "i"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SuperscriptBox["q", "2"]}]]}]}], TraditionalForm]]],
+ " +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     SubscriptBox["F", "z"], 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["\[PartialD]", "2"], 
+       SubscriptBox["Z", "i"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SuperscriptBox["q", "2"]}]]}]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", ",", 
+      RowBox[{"j", "=", "1"}]}], "N"], 
+    RowBox[{
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["F", "x"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SubscriptBox["X", "j"]}]], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["X", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", 
+     SubscriptBox["X", "i"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]]],
+ "  +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", ",", 
+      RowBox[{"j", "=", "1"}]}], "N"], 
+    RowBox[{
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["F", "x"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SubscriptBox["Y", "j"]}]], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["Y", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", 
+     SubscriptBox["Y", "i"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]]],
+ "  +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", ",", 
+      RowBox[{"j", "=", "1"}]}], "N"], 
+    RowBox[{
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["F", "x"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SubscriptBox["Z", "j"]}]], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["Z", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", 
+     SubscriptBox["Z", "i"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]]],
+ "         \n                            =      ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     SubscriptBox["F", "x"], 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["\[PartialD]", "2"], 
+       SubscriptBox["X", "i"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SuperscriptBox["q", "2"]}]]}]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     SubscriptBox["F", "y"], 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["\[PartialD]", "2"], 
+       SubscriptBox["Y", "i"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SuperscriptBox["q", "2"]}]]}]}], TraditionalForm]]],
+ " +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], "N"], 
+    RowBox[{
+     SubscriptBox["F", "z"], 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["\[PartialD]", "2"], 
+       SubscriptBox["Z", "i"]}], 
+      RowBox[{"\[PartialD]", " ", 
+       SuperscriptBox["q", "2"]}]]}]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", ",", 
+      RowBox[{"j", "=", "1"}]}], "N"], 
+    RowBox[{
+     SubscriptBox["s", "x"], 
+     SubscriptBox["\[Phi]", "i"], 
+     SubscriptBox["\[Phi]", "j"], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["X", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", 
+     SubscriptBox["X", "i"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]]],
+ "  +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", ",", 
+      RowBox[{"j", "=", "1"}]}], "N"], 
+    RowBox[{
+     SubscriptBox["s", "y"], 
+     SubscriptBox["\[Phi]", "i"], 
+     SubscriptBox["\[Phi]", "j"], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["Y", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", 
+     SubscriptBox["Y", "i"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]]],
+ "  +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", ",", 
+      RowBox[{"j", "=", "1"}]}], "N"], 
+    RowBox[{
+     SubscriptBox["s", "z"], 
+     SubscriptBox["\[Phi]", "i"], 
+     SubscriptBox["\[Phi]", "j"], 
+     FractionBox[
+      RowBox[{"\[PartialD]", 
+       SubscriptBox["Z", "i"]}], 
+      RowBox[{"\[PartialD]", " ", "q"}]]}]}], TraditionalForm]]],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    RowBox[{"\[PartialD]", 
+     SubscriptBox["Z", "i"]}], 
+    RowBox[{"\[PartialD]", " ", "q"}]], TraditionalForm]]],
+ "                \n                                                          \
+ \n                           "
+}], "Text",
+ CellChangeTimes->{{3.42892659445829*^9, 3.4289266122062902`*^9}, {
+  3.42892778028329*^9, 3.4289278685342903`*^9}, {3.42901672285567*^9, 
+  3.4290169627486696`*^9}, {3.4290170148586698`*^9, 3.42901747923167*^9}, {
+  3.42901754432767*^9, 3.42901757699667*^9}, {3.42902299189367*^9, 
+  3.42902300008167*^9}, {3.42902305191767*^9, 3.4290233576826696`*^9}, {
+  3.42902340859867*^9, 3.4290237379676695`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Remove", " ", "[", 
+  RowBox[{"'", 
+   RowBox[{"Global`", "'"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.4290242814706697`*^9, 3.4290243728546696`*^9}}],
+
+Cell["We are going to import the necessary data here", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Import", "[", "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.4290243838496695`*^9, 3.42902438946667*^9}}]
+},
+WindowSize->{1904, 1079},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (March 13, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[568, 21, 10317, 356, 378, "Text"],
+Cell[10888, 379, 177, 4, 31, "Input"],
+Cell[11068, 385, 62, 0, 29, "Text"],
+Cell[11133, 387, 157, 3, 52, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
